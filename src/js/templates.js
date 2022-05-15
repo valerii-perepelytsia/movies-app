@@ -58,6 +58,36 @@ export const renderDetails = ({id, title, overview, release_date, backdrop_path,
   </div>
 `);
 
+export const renderSearch = data => (`
+  <div class="container">
+      ${data.map(data => (renderSearchItems(data))).join('')}
+    </div>
+  </div>
+`);
+
+export const renderSearchItems = ({id, title, poster_path, popularity, overview, release_date}) => (`
+  <div class="search-container">
+    <div class="search-container__image">
+      <div class="search-container__poster">
+        <a class="search-container__href" href="#movieId=${id}">
+          <img class="search-container__result" src="${generateImageUrl(poster_path)}" alt="${title}" loading="lazy">
+        </a>
+      </div>
+    </div>
+    <div class="search-container__details">
+      <div class="search-container__wrapper">
+        <div class="search-container__title mb-15">
+          <h2 class="search-container__heading">${title}</h2>
+        </div>
+      </div>
+      <div class="date mb-15">${convertDate(release_date)}</div>
+      <div class="search-container__overview">
+        <p class="search-container__text">${overview}</p>
+      </div>
+    </div>
+  </div>
+`);
+
 export const renderError = ({ status_code, status_message }) => (`
   <div class="container">
     <div class="error">

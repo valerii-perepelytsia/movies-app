@@ -1,20 +1,36 @@
-import {getMovieDetails, getMovies} from "./api";
+import {getMovieDetails, getMovies, SearchMovie} from "./api";
 
-window.addEventListener('hashchange', e => {
-    const {location: {hash}} = window;
-    const [, movieId] = hash.split('=');
+window.addEventListener('hashchange', () => {
+    checkUrl();
+})
 
-    getMovieDetails(movieId, '.root');
+const searchInput = document.querySelector('#search');
+const searchBtn = document.querySelector('#search-button');
+
+searchInput.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+        e.preventDefault();
+        searchBtn.click();
+    }
+})
+
+searchBtn.addEventListener('click', () => {
+    SearchMovie(searchInput.value, '.root');
 })
 
 const checkUrl = () => {
     const {location: {hash}} = window;
     const [hashName, movieId] = hash.split('=');
 
-    if(hashName === '#movieId') {
-        getMovieDetails(movieId, '.root');
-    } else {
-        getMovies('popular', '.root');
+    switch (hashName) {
+        case '#movieId':
+            getMovieDetails(movieId, '.root');
+            break
+        case '#search':
+            SearchMovie(movieId, '.root');
+            break
+        default:
+            getMovies('popular', '.root');
     }
 }
 
