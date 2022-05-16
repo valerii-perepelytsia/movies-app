@@ -65,7 +65,7 @@ export const renderSearch = data => (`
   </div>
 `);
 
-export const renderSearchItems = ({id, title, poster_path, popularity, overview, release_date}) => (`
+export const renderSearchItems = ({id, title, poster_path, overview, release_date}) => (`
   <div class="search-container">
     <div class="search-container__image">
       <div class="search-container__poster">

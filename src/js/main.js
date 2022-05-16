@@ -1,4 +1,4 @@
-import {getMovieDetails, getMovies, SearchMovie} from "./api";
+import {getMovieDetails, getMovies, searchMovie} from "./api";
 
 window.addEventListener('hashchange', () => {
     checkUrl();
@@ -15,7 +15,8 @@ searchInput.addEventListener("keypress", (e) => {
 })
 
 searchBtn.addEventListener('click', () => {
-    SearchMovie(searchInput.value, '.root');
+    window.location.hash = '#search=' + searchInput.value
+    searchMovie(searchInput.value, '.root');
 })
 
 const checkUrl = () => {
@@ -27,7 +28,7 @@ const checkUrl = () => {
             getMovieDetails(movieId, '.root');
             break
         case '#search':
-            SearchMovie(movieId, '.root');
+            searchMovie(movieId, '.root');
             break
         default:
             getMovies('popular', '.root');

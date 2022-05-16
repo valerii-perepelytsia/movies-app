@@ -33,7 +33,7 @@ export const getMovieDetails = (path, selector) => {
         });
 }
 
-export const SearchMovie = (path, selector) => {
+export const searchMovie = (path, selector) => {
     fetch(generateSearchUrl(path))
         .then(res => res.json())
         .then(data => {
